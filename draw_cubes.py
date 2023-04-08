@@ -25,13 +25,9 @@ def draw_cubes(img, wavelengths, savedir):
         colors = [(0, 0, 0), color]
         cmap = LinearSegmentedColormap.from_list('my_colormap', colors)
         fig = plt.figure()
-        
         img_temp = img[:, :, i]
-        vmin = np.min(img_temp)
-        vmax = np.max(img_temp)
-        img_temp = (img_temp - vmin) / (vmax - vmin)
         
-        plt.imshow(img_temp, cmap=cmap, vmin=0, vmax=1)
+        plt.imshow(img_temp, cmap=cmap, norm="linear")
         plt.axis('off')
         
         if os.path.exists(savedir) is False:
@@ -51,11 +47,8 @@ def draw_cubes(img, wavelengths, savedir):
 
         plt.subplot(line_num, 7, i+1)
         img_temp = img[:, :, i]
-        vmin = np.min(img_temp)
-        vmax = np.max(img_temp)
-        img_temp = (img_temp - vmin) / (vmax - vmin)
         
-        plt.imshow(img_temp, cmap=cmap, vmin=0, vmax=1)
+        plt.imshow(img_temp, cmap=cmap, norm="linear")
         plt.text(30, 80, str(round(wavelengths[i], 1)) + " nm", fontsize=14, color="white", fontweight="bold")
         plt.axis('off')
 
